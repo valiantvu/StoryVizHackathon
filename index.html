@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Story Viz</title>
-        <link rel="stylesheet" href="styles/styles.css">
+        <!-- <link rel="stylesheet" href="styles/styles.css"> -->
         <!--<script src="bower_components/jquery/jquery.min.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script> -->
         <link rel="shortcut icon" href="images/Jon.png" type="image/x-icon">
@@ -16,7 +16,6 @@
     }
 
     .node {
-      fill: #000;
       stroke: #fff;
       stroke-width: 1.5px;
     }
@@ -31,8 +30,9 @@
         </audio> -->
 
         <script>
-            var nodeData = [{id: "a"}, {id: "b"}];
+            var nodeData = [{id: "a", name: "Arya"}, {id: "b", name: "Ned"}];
             var linkData = [{source: 0, target: 1}];
+
             var width = 960,
                 height = 500;
 
@@ -51,6 +51,16 @@
                 .attr("width", width)
                 .attr("height", height);
 
+            svg.append("defs").append("pattern")
+                    .attr("id", "character")
+                    .attr("height", 60)
+                    .attr("width", 60)
+                    .attr("patternUnits", "objectBoundingBox")
+                  .append("image")
+                    .attr("xlink:href", "images/Arya.png")
+                    .attr("height", 60)
+                    .attr("width", 60);
+
             var node = svg.selectAll(".node"),
                 link = svg.selectAll(".link");
 
@@ -59,16 +69,38 @@
                 //     b = {id: "b"};
                 // nodes.push(a, b);
                 // links.push({source: a, target: b});
+
                 start();
             }, 0);
 
             function start() {
+                // Bind data from the links array, return all link nodes
                 link = link.data(force.links(), function (d) { return d.source.id + "-" + d.target.id; });
-                link.enter().insert("line", ".node").attr("class", "link");
+
+                // Select empty link nodes with data attribute
+                link.enter()
+                    // insert a line element
+                    .insert("line", ".node")
+                    // assign 'link' class
+                    .attr("class", "link");
+
                 link.exit().remove();
 
+                // Bind data from the nodes array, return all nodes
                 node = node.data(force.nodes(), function (d) { return d.id; });
-                node.enter().append("circle").attr("class", function(d) { return "node " + d.id; }).attr("r", 8);
+
+                
+
+                // Select empty nodes
+                node.enter()
+                    // append a circle svg element
+                    .append("circle")
+                    // assign class "node.id"
+                    .attr("class", function(d) { return "node " + d.id; })
+                    // set radius to 8
+                    .attr("r", 30)
+                    .attr("fill", "url(#character)");
+
                 node.exit().remove();
 
                 force.start();                
