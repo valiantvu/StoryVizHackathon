@@ -1,16 +1,89 @@
 <!doctype html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Story Viz</title>
-        <!-- <link rel="stylesheet" href="styles/styles.css"> -->
-        <script src="GOT_ThemeSong.mp3"></script>
+        <link rel="stylesheet" href="styles/styles.css">
+        <!--<script src="bower_components/jquery/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script> -->
+        <link rel="shortcut icon" href="images/Jon.png" type="image/x-icon">
+
     </head>
+    <style>
+    .link {
+      stroke: #000;
+      stroke-width: 1.5px;
+    }
+
+    .node {
+      fill: #000;
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
+
+    </style>
     <body>
         <script src="http://d3js.org/d3.v3.min.js"></script>
-        
-        <div>hi</div>
-        <audio autoplay>
+        <!-- <script src="storyviz.js"></script> -->
+
+        <!-- <audio autoplay>
             <source src="GOT_ThemeSong.mp3" type="audio/mpeg">
-        </audio>
+        </audio> -->
+
+        <script>
+            var nodeData = [{id: "a"}, {id: "b"}];
+            var linkData = [{source: 0, target: 1}];
+            var width = 960,
+                height = 500;
+
+            var nodes = nodeData,
+                links = linkData;
+
+            var force = d3.layout.force()
+                .nodes(nodes)
+                .links(links)
+                .charge(-400)
+                .linkDistance(120)
+                .size([width, height])
+                .on("tick", tick);
+
+            var svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            var node = svg.selectAll(".node"),
+                link = svg.selectAll(".link");
+
+            setTimeout(function() {
+                // var a = {id: "a"},
+                //     b = {id: "b"};
+                // nodes.push(a, b);
+                // links.push({source: a, target: b});
+                start();
+            }, 0);
+
+            function start() {
+                link = link.data(force.links(), function (d) { return d.source.id + "-" + d.target.id; });
+                link.enter().insert("line", ".node").attr("class", "link");
+                link.exit().remove();
+
+                node = node.data(force.nodes(), function (d) { return d.id; });
+                node.enter().append("circle").attr("class", function(d) { return "node " + d.id; }).attr("r", 8);
+                node.exit().remove();
+
+                force.start();                
+            }
+
+            function tick() {
+              node.attr("cx", function(d) { return d.x; })
+                  .attr("cy", function(d) { return d.y; })
+
+              link.attr("x1", function(d) { return d.source.x; })
+                  .attr("y1", function(d) { return d.source.y; })
+                  .attr("x2", function(d) { return d.target.x; })
+                  .attr("y2", function(d) { return d.target.y; });
+            }
+        </script>
+
     </body>
 </html>
