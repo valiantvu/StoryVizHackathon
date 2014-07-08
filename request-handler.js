@@ -24,7 +24,7 @@ exports.handleRequest = function(req, res) {
     }
 
     if (req.method === 'GET') {
-      if (req.url === '/') {
+      if (fileType === 'html') {
         serveAsset(200, headers, 'index.html');
       } else if (fileType === 'css') {
         headers['Content-Type'] = 'text/css';
