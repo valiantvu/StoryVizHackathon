@@ -2,14 +2,6 @@
 var width = $('#network').width(),
     height = $('#network').height();
 
-$('.range-slider').on('change.fndtn.slider', function(){
-
-    console.log('Slider moved');
-  // do something when the value changes
-});
-
-
-
 d3.json("characters.json", function(json) {
 
     var force = d3.layout.force()
@@ -47,19 +39,22 @@ d3.json("characters.json", function(json) {
 
     var chapter = 0;
 
+    var changeIcon = function(chapter) {
+        // If character has died by this chapter, change its icon
+        node.attr("xlink:href", function(d) { 
+            if (d.chapter > 0 && chapter > d.chapter) {
+                return "images/dead.png";
+            }
+            return d.logo; 
+        });
+    };
+
     var playChapters = function() {
 
         var nextChapter = setInterval(function(){
             // console.log(chapter);
             chapter++;
-
-            // If character has died by this chapter, change its icon
-            node.attr("xlink:href", function(d) { 
-                if (d.chapter > 0 && chapter > d.chapter) {
-                    return "images/dead.png";
-                }
-                return d.logo; 
-            });
+            changeIcon(chapter);
             
             $('.range-slider').foundation('slider', 'set_value', chapter);
             $('#sliderOutput').text(chapter);
@@ -72,6 +67,14 @@ d3.json("characters.json", function(json) {
 
     $('#playChapters').click(function(){
         playChapters();
+    });
+
+    $('.range-slider').on('change.fndtn.slider', function(){
+        chapter = $('.range-slider input')[0].value;
+
+        changeIcon(chapter);
+        $('#sliderOutput').text(chapter);
+
     });
 
     function start() {
