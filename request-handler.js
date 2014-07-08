@@ -24,7 +24,11 @@ exports.handleRequest = function(req, res) {
     }
 
     if (req.method === 'GET') {
-      if (fileType === 'html') {
+      
+      if (fileType === 'json') {
+        headers['Content-Type'] = 'application/json';
+        serveAsset(200, headers, 'characters.json');
+      } else if (fileType === 'html') {
         serveAsset(200, headers, 'index.html');
       } else if (fileType === 'css') {
         headers['Content-Type'] = 'text/css';
@@ -32,9 +36,6 @@ exports.handleRequest = function(req, res) {
       } else if (fileType === 'png') {
         headers['Content-Type'] = 'image/png';
         serveAsset(200, headers, "." + pathName);
-      } else if (fileType ==='json') {
-        headers['Content-Type'] = 'application/json';
-        serveAsset(200, headers, 'characters.json');
       } else {
         headers['Content-Type'] = 'application/javascript';
         serveAsset(200, headers, "." + pathName);
