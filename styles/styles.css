@@ -17,14 +17,21 @@
 
 .heading {
     width: 110%;
-    height: 15%;
-    position: fixed;
+    height: 13%;
+    position: absolute;
     top: -5px;
     left: -5px;
 }
 
+body {
+    background-image: url("../images/westeros_transparent.png");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
 #network {
-    top: 20px;
+    top: 50px;
     height: 1000px;
     width: 100%;
 }
