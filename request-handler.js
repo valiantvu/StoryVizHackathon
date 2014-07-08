@@ -32,6 +32,9 @@ exports.handleRequest = function(req, res) {
       } else if (fileType === 'png') {
         headers['Content-Type'] = 'image/png';
         serveAsset(200, headers, "." + pathName);
+      } else if (fileType ==='json') {
+        headers['Content-Type'] = 'application/json';
+        serveAsset(200, headers, pathName);
       } else {
         headers['Content-Type'] = 'application/javascript';
         serveAsset(200, headers, "." + pathName);
