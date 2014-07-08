@@ -2,7 +2,7 @@ var width = $('body').width(),
     height = 900;
 
 d3.json("characters.json", function(json) {
-    console.log(json);
+
     var force = d3.layout.force()
         .nodes(json.nodes)
         .links(json.links)
@@ -34,6 +34,24 @@ d3.json("characters.json", function(json) {
         start();
     }, 0);
 
+    var chapter = 0;
+
+    var nextChapter = setInterval(function(){
+        console.log(chapter);
+
+        chapter++;
+        node.attr("xlink:href", function(d) { 
+            if (d.chapter > 0 && chapter > d.chapter) {
+                return "images/dead.png";
+            }
+            return d.logo; 
+        });
+        
+        if (chapter > 400) {
+            clearInterval(nextChapter);
+        }
+    }, 100);
+
     function start() {
         
         // Define drag behavior
@@ -60,7 +78,6 @@ d3.json("characters.json", function(json) {
             force.resume();
         }
 
-
         // Bind data from the links array, return all link nodes
         // console.log(force.links());
         // link = link.data(force.links(), function (d) { console.log(data); return d.source.id + "-" + d.target.id; });
@@ -78,34 +95,31 @@ d3.json("characters.json", function(json) {
         // Bind data from the nodes array, return all nodes
         node = node.data(json.nodes);
 
-        // Select empty nodes
-            // // append a circle svg element
-            // .append("circle")
-            // // assign class "node.id"
-            // .attr("class", function(d) { return "node " + d.id; })
-            // // set radius to 8
-            // .attr("r", 15);
-            // // .attr("fill", "url(#character)")
         var nodeEnter = node.enter();
 
         // nodeEnter.append("svg:g")
         //   .attr("class", "node")
-        //   .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-        //   // .on("click", click)
-        //   .call(force.drag);
+        //   .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
         var imageHeight = 20,
             imageWidth = 20;
 
         nodeEnter.append("svg:image")
            .attr("class", "node")
-           .attr("xlink:href", function(d) { return d.logo; })
+           // Check time, if character is dead at current chapter, change xlink
+           .attr("xlink:href", function(d) { 
+                if (d.chapter > 0 && chapter > d.chapter) {
+                    return "images/dead.png";
+                }
+                return d.logo; 
+            })
            .attr("width", function(d) { return d.size; })
            .attr("height", function(d) { return d.size; })
            .call(node_drag)
            .append("svg:title")
            .text(function(d) { return d.name; })
            .attr("class", "title");
-           // .on("mouseover", mouseover)
+
 
         // $('.node').tipsy({ 
         //     gravity: 'w', 
@@ -135,37 +149,5 @@ d3.json("characters.json", function(json) {
           .attr("x2", function(d) { return d.target.x; })
           .attr("y2", function(d) { return d.target.y; });
     }
-   
-    // function mouseover(d) {
 
-    // }
-
-
-    // function click(d) {
-    //   if (d.children) {
-    //     d._children = d.children;
-    //     d.children = null;
-    //   } else {
-    //     d.children = d._children;
-    //     d._children = null;
-    //   }
-     
-    //   update();
-    // }
-    // function flatten(root) {
-    //   var nodes = []; 
-    //   var i = 0;
-     
-    //   function recurse(node) {
-    //     if (node.children) 
-    //         node.children.forEach(recurse);
-    //     if (!node.id) 
-    //         node.id = ++i;
-    //     nodes.push(node);
-    //   }
-     
-    //   recurse(root);
-    //   return nodes;
-    // }   
-    
 });
