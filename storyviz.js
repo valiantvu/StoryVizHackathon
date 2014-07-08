@@ -2,6 +2,7 @@ var width = 960,
     height = 500;
 
 d3.json("data.json", function(json) {
+    // console.log(json.links);
 
     var force = d3.layout.force()
         .nodes(json.nodes)
@@ -40,7 +41,9 @@ d3.json("data.json", function(json) {
 
     function start() {
         // Bind data from the links array, return all link nodes
-        link = link.data(force.links(), function (d) { return d.source.id + "-" + d.target.id; });
+        // console.log(force.links());
+        // link = link.data(force.links(), function (d) { console.log(data); return d.source.id + "-" + d.target.id; });
+        link = link.data(json.links);
 
         // Select empty link nodes with data attribute
         link.enter()
@@ -52,9 +55,7 @@ d3.json("data.json", function(json) {
         link.exit().remove();
 
         // Bind data from the nodes array, return all nodes
-        node = node.data(force.nodes(), function (d) { return d.id; });
-
-        
+        node = node.data(json.nodes);
 
         // Select empty nodes
         node.enter()
