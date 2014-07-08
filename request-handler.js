@@ -25,9 +25,20 @@ exports.handleRequest = function(req, res) {
 
     if (req.method === 'GET') {
       
-      if (fileType === 'json') {
+      console.log("pathName: ", pathName);
+      console.log("fileType: ", fileType);
+
+      if (req.url === '/') {
+        serveAsset(200, headers, 'index.html');
+      } else if (fileType === 'json') {
         headers['Content-Type'] = 'application/json';
-        serveAsset(200, headers, 'characters.json');
+        res.writeHead(200, headers);
+
+        console.log(JSON.parse(fs.readFileSync('characters.json').toString()));
+
+        res.end(fs.readFileSync('characters.json').toString());
+
+        // serveAsset(200, headers, 'characters.json');
       } else if (fileType === 'html') {
         serveAsset(200, headers, 'index.html');
       } else if (fileType === 'css') {
