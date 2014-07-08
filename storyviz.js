@@ -1,14 +1,13 @@
-var width = 960,
-    height = 500;
+var width = $('body').width(),
+    height = 900;
 
-d3.json("data.json", function(json) {
-    // console.log(json.links);
-
+d3.json("characters.json", function(json) {
+    console.log(json);
     var force = d3.layout.force()
         .nodes(json.nodes)
         .links(json.links)
-        .charge(-400)
-        .linkDistance(120)
+        .charge(-100)
+        .linkDistance(50)
         .size([width, height])
         .on("tick", tick);
 
@@ -32,11 +31,6 @@ d3.json("data.json", function(json) {
         link = svg.selectAll(".link");
 
     setTimeout(function() {
-        // var a = {id: "a"},
-        //     b = {id: "b"};
-        // nodes.push(a, b);
-        // links.push({source: a, target: b});
-
         start();
     }, 0);
 
@@ -49,7 +43,7 @@ d3.json("data.json", function(json) {
             .on("dragend", dragend);
 
         function dragstart(d, i) {
-            force.stop() // stops the force auto positioning before you start dragging
+            force.stop()
         }
 
         function dragmove(d, i) {
@@ -57,11 +51,11 @@ d3.json("data.json", function(json) {
             d.py += d3.event.dy;
             d.x += d3.event.dx;
             d.y += d3.event.dy; 
-            tick(); // this is the key to make it work together with updating both px,py,x,y on d !
+            tick();
         }
 
         function dragend(d, i) {
-            d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+            d.fixed = true;
             tick();
             force.resume();
         }
@@ -83,7 +77,6 @@ d3.json("data.json", function(json) {
 
         // Bind data from the nodes array, return all nodes
         node = node.data(json.nodes);
-            // .call(node_drag);
 
         // Select empty nodes
             // // append a circle svg element
@@ -100,14 +93,16 @@ d3.json("data.json", function(json) {
         //   .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
         //   // .on("click", click)
         //   .call(force.drag);
+        var imageHeight = 20,
+            imageWidth = 20;
 
         nodeEnter.append("svg:image")
            .attr("class", function (d) {
                return "node " + d.id;
                })
            .attr("xlink:href", function(d) { return d.logo; })
-           .attr("width", "50px")
-           .attr("height", "50px")
+           .attr("width", function(d) { return d.size; })
+           .attr("height", function(d) { return d.size; })
            // .on("click", click)
            .call(node_drag);
 
@@ -123,8 +118,8 @@ d3.json("data.json", function(json) {
     }
 
     function tick() {
-      node.attr("x", function(d) { return d.x; })
-          .attr("y", function(d) { return d.y; })
+      node.attr("x", function(d) { return d.x - 10; })
+          .attr("y", function(d) { return d.y - 10; })
 
       link.attr("x1", function(d) { return d.source.x; })
           .attr("y1", function(d) { return d.source.y; })
