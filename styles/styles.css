@@ -7,3 +7,10 @@
   stroke: #fff;
   stroke-width: 1.5px;
 }
+
+.title {
+    font-family: Verdana;
+    font-size: 30px;
+    fill: white;
+    stroke: blue;
+}
