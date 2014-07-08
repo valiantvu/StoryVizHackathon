@@ -34,8 +34,8 @@ d3.json("characters.json", function(json) {
     var node = svg.selectAll(".node"),
         link = svg.selectAll(".link");
 
-
-    var chapter = 350;
+    var chapter = 0;
+    $('.range-slider').foundation('slider', 'set_value', chapter);
 
     var changeIcon = function(chapter) {
         // If character has died by this chapter, change its icon
@@ -61,7 +61,7 @@ d3.json("characters.json", function(json) {
             if (chapter >= 400) {
                 clearInterval(nextChapter);
             }
-        }, 50);
+        }, 1);
     }
 
     var play = false;
@@ -73,7 +73,7 @@ d3.json("characters.json", function(json) {
             play = true;
         } else {
             clearInterval(nextChapter);
-            this.innerHTML = "Play Death";
+            this.innerHTML = "Play";
             play = false;
         }
     });
