@@ -1,0 +1,45 @@
+{
+    "nodes":
+    [
+        {
+            "children": null, 
+            "cluster": 18, 
+            "id": 0, 
+            "house": "Winterfell", 
+            "size": 50, 
+            "name": "Arya"
+        }, 
+        {
+            "children": null, 
+            "cluster": 0, 
+            "id": 1, 
+            "house": "Winterfell", 
+            "size": 50, 
+            "name": "Ned"
+        }, 
+        {
+            "children": null, 
+            "cluster": 0, 
+            "id": 2, 
+            "house": "Winterfell", 
+            "size": 50, 
+            "name": "Robb"
+        }
+    ],
+
+    "links": 
+    [
+        {
+            "source": 0,
+            "target": 1
+        },
+        {
+            "source": 1,
+            "target": 2
+        },
+        {
+            "source": 0,
+            "target": 2
+        }
+    ]
+}
