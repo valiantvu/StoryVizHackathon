@@ -4,17 +4,110 @@
         {
             "id": 0, 
             "house": "Winterfell", 
-            "name": "Arya"
+            "name": "Ned",
+            "logo": "images/Ned.png"
         }, 
         {
             "id": 1, 
             "house": "Winterfell", 
-            "name": "Ned"
+            "name": "Arya",
+            "logo": "images/Arya.png"
         }, 
         {
             "id": 2, 
             "house": "Winterfell", 
-            "name": "Robb"
+            "name": "Robb",
+            "logo": "images/Robb.png"
+        },
+        {
+            "id": 3, 
+            "house": "Winterfell", 
+            "name": "Sansa",
+            "logo": "images/Sansa.png"
+        },
+        {
+            "id": 4, 
+            "house": "Winterfell", 
+            "name": "Jon",
+            "logo": "images/Jon.png"
+        },
+        {
+            "id": 5, 
+            "house": "Winterfell", 
+            "name": "Hodor",
+            "logo": "images/Hodor.png"
+        },
+        {
+            "id": 6, 
+            "house": "Winterfell", 
+            "name": "Wolf",
+            "logo": "images/Wolf.png"
+        },
+        {
+            "id": 7, 
+            "house": "Free", 
+            "name": "Ygritte",
+            "logo": "images/Ygritte.png"
+        },
+        {
+            "id": 8, 
+            "house": "Lannister", 
+            "name": "Tywin",
+            "logo": "images/Tywin.png"
+        },
+        {
+            "id": 9, 
+            "house": "Lannister", 
+            "name": "Cersei",
+            "logo": "images/Cersei.png"
+        },
+        {
+            "id": 10, 
+            "house": "Lannister", 
+            "name": "Tyrion",
+            "logo": "images/Tyrion.png"
+        },
+        {
+            "id": 11, 
+            "house": "Lannister", 
+            "name": "Jamie",
+            "logo": "images/Jamie.png"
+        },
+        {
+            "id": 12, 
+            "house": "Lannister", 
+            "name": "Joffrey",
+            "logo": "images/Joffrey.png"
+        },
+        {
+            "id": 13, 
+            "house": "Free", 
+            "name": "Hound",
+            "logo": "images/Hound.png"
+        },
+        {
+            "id": 14, 
+            "house": "Free", 
+            "name": "Petyr",
+            "logo": "images/Petyr.png"
+        },
+        {
+            "id": 15, 
+            "house": "Baratheon", 
+            "name": "Renly",
+            "logo": "images/Renly.png"
+        },
+        {
+            "id": 16, 
+            "house": "Dothraki", 
+            "name": "Drogo",
+            "logo": "images/Drogo.png"
+        },
+        {
+            "id": 17, 
+            "house": "Dothraki", 
+            "name": "Daeny",
+            "logo": "images/Daeny.png"
         }
     ],
 
@@ -25,12 +118,44 @@
             "target": 1
         },
         {
-            "source": 1,
+            "source": 0,
             "target": 2
         },
         {
             "source": 0,
-            "target": 2
+            "target": 3
+        },
+        {
+            "source": 0,
+            "target": 4
+        },
+        {
+            "source": 0,
+            "target": 5
+        },
+        {
+            "source": 0,
+            "target": 6
+        },
+        {
+            "source": 8,
+            "target": 9
+        },
+        {
+            "source": 8,
+            "target": 10
+        },
+        {
+            "source": 8,
+            "target": 11
+        },
+        {
+            "source": 9,
+            "target": 12
+        },
+        {
+            "source": 16,
+            "target": 17
         }
     ]
 }
