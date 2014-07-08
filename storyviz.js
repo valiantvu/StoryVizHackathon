@@ -2,6 +2,8 @@
 var width = $('#network').width(),
     height = $('#network').height();
 
+
+
 d3.json("characters.json", function(json) {
 
     var force = d3.layout.force()
@@ -32,12 +34,8 @@ d3.json("characters.json", function(json) {
     var node = svg.selectAll(".node"),
         link = svg.selectAll(".link");
 
-    setTimeout(function() {
-        start();
-    }, 0);
 
-
-    var chapter = 0;
+    var chapter = 350;
 
     var changeIcon = function(chapter) {
         // If character has died by this chapter, change its icon
@@ -49,33 +47,55 @@ d3.json("characters.json", function(json) {
         });
     };
 
-    var playChapters = function() {
+    // initialize the nextChapter setInterval to enable other functions to clearInterval
+    var nextChapter;
 
-        var nextChapter = setInterval(function(){
-            // console.log(chapter);
+    var playChapters = function() {
+        nextChapter = setInterval(function(){
             chapter++;
             changeIcon(chapter);
             
             $('.range-slider').foundation('slider', 'set_value', chapter);
             $('#sliderOutput').text(chapter);
 
-            if (chapter > 400) {
+            if (chapter >= 400) {
                 clearInterval(nextChapter);
             }
-        }, 100);
+        }, 50);
     }
 
+    var play = false;
+
     $('#playChapters').click(function(){
-        playChapters();
+        if (!play) {
+            playChapters();
+            this.innerHTML = "Pause";
+            play = true;
+        } else {
+            clearInterval(nextChapter);
+            this.innerHTML = "Play Death";
+            play = false;
+        }
     });
 
-    $('.range-slider').on('change.fndtn.slider', function(){
+    
+    var updateSlider = function(){
         chapter = $('.range-slider input')[0].value;
-
         changeIcon(chapter);
         $('#sliderOutput').text(chapter);
+    };
 
+    $(document).foundation({
+      slider: {
+        on_change: function(){
+            updateSlider();
+        }
+      }
     });
+
+    setTimeout(function() {
+        start();
+    }, 0);
 
     function start() {
         
