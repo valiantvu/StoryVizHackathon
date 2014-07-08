@@ -1,6 +1,7 @@
 var http = require("http");
 var handler = require("./request-handler");
-var port = 8000;
+var port = process.env.port || 8000;
+
 var ip = "127.0.0.1";
 var server = http.createServer(handler.handleRequest);
 

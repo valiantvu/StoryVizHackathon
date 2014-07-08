@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="bower_components/foundation/css/foundation.css">
         <link rel="stylesheet" href="styles/styles.css">
 
-
+        <script src="bower_components/d3/d3.js"></script>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script> 
         <!-- <link rel="stylesheet" href="styles/src/stylesheets/tipsy.css" type="text/css" /> -->
@@ -20,16 +20,17 @@
 
     <body>
 
-        <script src="http://d3js.org/d3.v3.min.js"></script>
-        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <!--<script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
         
+        <!-- Page Header -->
         <div class="page-header">
           <h1 style="font-family:Optima">StoryViz: <small style="font-family:Script">Game of Thrones</small></h1>
         </div>
         
+        <!-- Slider Bar -->
         <div class="row">
           <div class="small-2 medium-1 columns"></div>
-            
           <div class="small-10 medium-11 columns">
             <h3 style="font-family:Optima">Chapter <h4 class="subheader" id="sliderOutput" class="label">0</h4></h3>
             <div class="range-slider" data-slider data-options="start: 0; end: 400;">
@@ -46,21 +47,20 @@
 
         <!-- <img class="heading" src="images/GOTHeadingCropped.png"> -->
 
-        <!-- <audio autoplay>
+<!--         <audio autoplay>
             <source src="GOT_ThemeSong.mp3" type="audio/mpeg">
         </audio> -->
 
-
-        <!-- Initialize foundation -->
-        <script src="bower_components/foundation/js/vendor/jquery.js"></script>
+        <!--<script src="bower_components/foundation/js/vendor/jquery.js"></script>
         <script src="bower_components/foundation/js/vendor/fastclick.js"></script>
+        <script src="bower_components/foundation/js/foundation/foundation.slider.js"></script>-->
         <script src="bower_components/foundation/js/foundation.min.js"></script>
-        <script src="bower_components/foundation/js/foundation/foundation.slider.js"></script>
+        <!-- Run storyviz -->
         <script src="storyviz.js"></script>
+        <!-- Initialize foundation -->
         <script>
           $(document).foundation();
         </script>
 
-        <!-- Run storyviz -->
     </body>
 </html>
