@@ -1,5 +1,5 @@
-var width = $('body').width(),
-    height = 900;
+var width = $('#network').width(),
+    height = $('#network').height();
 
 d3.json("characters.json", function(json) {
 
@@ -9,9 +9,10 @@ d3.json("characters.json", function(json) {
         .charge(-100)
         .linkDistance(50)
         .size([width, height])
+        .gravity(0.15)
         .on("tick", tick);
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#network").append("svg")
         .attr("width", width)
         .attr("height", height);
 
@@ -37,7 +38,7 @@ d3.json("characters.json", function(json) {
     var chapter = 0;
 
     var nextChapter = setInterval(function(){
-        console.log(chapter);
+        // console.log(chapter);
 
         chapter++;
         node.attr("xlink:href", function(d) { 
@@ -46,7 +47,7 @@ d3.json("characters.json", function(json) {
             }
             return d.logo; 
         });
-        
+
         if (chapter > 400) {
             clearInterval(nextChapter);
         }

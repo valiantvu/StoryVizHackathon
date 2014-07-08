@@ -14,3 +14,18 @@
     fill: white;
     stroke: blue;
 }
+
+.heading {
+    width: 110%;
+    height: 15%;
+    position: fixed;
+    top: -5px;
+    left: -5px;
+}
+
+#network {
+    top: 20px;
+    height: 1000px;
+    width: 100%;
+}
+
