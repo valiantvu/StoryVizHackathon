@@ -28,12 +28,16 @@ exports.handleRequest = function(req, res) {
       console.log("pathName: ", pathName);
       console.log("fileType: ", fileType);
 
-      if (req.url === '/') {
-        serveAsset(200, headers, 'index.html');
-      } else if (fileType === 'json') {
+      if (fileType === 'json') {
         headers['Content-Type'] = 'application/json';
         res.writeHead(200, headers);
         res.end(fs.readFileSync('./data/characters.json').toString());
+      } else if (req.url === '/') {
+        serveAsset(200, headers, 'index.html');
+      // } else if (fileType === 'json') {
+      //   headers['Content-Type'] = 'application/json';
+      //   res.writeHead(200, headers);
+      //   res.end(fs.readFileSync('./data/characters.json').toString());
 
         // serveAsset(200, headers, 'characters.json');
       } else if (fileType === 'html') {
