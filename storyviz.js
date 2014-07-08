@@ -1,5 +1,14 @@
+
 var width = $('#network').width(),
     height = $('#network').height();
+
+$('.range-slider').on('change.fndtn.slider', function(){
+
+    console.log('Slider moved');
+  // do something when the value changes
+});
+
+
 
 d3.json("characters.json", function(json) {
 
@@ -35,23 +44,35 @@ d3.json("characters.json", function(json) {
         start();
     }, 0);
 
+
     var chapter = 0;
 
-    var nextChapter = setInterval(function(){
-        // console.log(chapter);
+    var playChapters = function() {
 
-        chapter++;
-        node.attr("xlink:href", function(d) { 
-            if (d.chapter > 0 && chapter > d.chapter) {
-                return "images/dead.png";
+        var nextChapter = setInterval(function(){
+            // console.log(chapter);
+            chapter++;
+
+            // If character has died by this chapter, change its icon
+            node.attr("xlink:href", function(d) { 
+                if (d.chapter > 0 && chapter > d.chapter) {
+                    return "images/dead.png";
+                }
+                return d.logo; 
+            });
+            
+            $('.range-slider').foundation('slider', 'set_value', chapter);
+            $('#sliderOutput').text(chapter);
+
+            if (chapter > 400) {
+                clearInterval(nextChapter);
             }
-            return d.logo; 
-        });
+        }, 100);
+    }
 
-        if (chapter > 400) {
-            clearInterval(nextChapter);
-        }
-    }, 100);
+    $('#playChapters').click(function(){
+        playChapters();
+    });
 
     function start() {
         

@@ -3,32 +3,62 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Story Viz</title>
+        
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="bower_components/foundation/css/foundation.css">
         <link rel="stylesheet" href="styles/styles.css">
-        <link rel="stylesheet" href="styles/src/stylesheets/tipsy.css" type="text/css" />
+
+
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script type='text/javascript' src='styles/src/javascripts/jquery.tipsy.js'></script>
-        <!-- <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>  -->
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script> 
+        <!-- <link rel="stylesheet" href="styles/src/stylesheets/tipsy.css" type="text/css" /> -->
+        <!--<script type='text/javascript' src='styles/src/javascripts/jquery.tipsy.js'></script>-->
+        <script src="bower_components/foundation/js/vendor/modernizr.js"></script>
         <link rel="shortcut icon" href="images/Jon.png" type="image/x-icon">
 
     </head>
 
     <body>
-<!--         <div id="loader">rendering...</div>
-        <div id="parent"></div>
-        <div id="buttons"></div> -->
 
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <img class="heading" src="images/GOTHeadingCropped.png">
-        <!-- <img class="layer" src="images/westeros.jpg"></div> -->
-        <h1>Story Viz</h1>
-        <div id="network"></div>
+        
+        <div class="page-header">
+          <h1>Story Viz: <small>Game of Thrones</small></h1>
+        </div>
+
+        <div class="row">
+          <div class="small-2 medium-1 columns">
+          </div>
+          <div class="small-10 medium-11 columns">
+            <h3>Chapter: <h4 class="subheader" id="sliderOutput" class="label"></h4></h3>
+            <a href="#" class="button" id="playChapters">Play Deaths</a>
+            <div class="range-slider" data-slider data-options="start: 1; end: 400;">
+              <span class="range-slider-handle"></span>
+              <span class="range-slider-active-segment"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Force layout appended to #network -->
+        <div id="network"><div>
+        <!-- <img class="heading" src="images/GOTHeadingCropped.png"> -->
 
         <!-- <audio autoplay>
             <source src="GOT_ThemeSong.mp3" type="audio/mpeg">
         </audio> -->
+
+
+        <!-- Initialize foundation -->
+        <script src="bower_components/foundation/js/vendor/jquery.js"></script>
+        <script src="bower_components/foundation/js/vendor/fastclick.js"></script>
+        <script src="bower_components/foundation/js/foundation.min.js"></script>
+        <script src="bower_components/foundation/js/foundation/foundation.slider.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+
+        <!-- Run storyviz -->
         <script src="storyviz.js"></script>
-
-
     </body>
 </html>
