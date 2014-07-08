@@ -33,10 +33,7 @@ exports.handleRequest = function(req, res) {
       } else if (fileType === 'json') {
         headers['Content-Type'] = 'application/json';
         res.writeHead(200, headers);
-
-        console.log(JSON.parse(fs.readFileSync('characters.json').toString()));
-
-        res.end(fs.readFileSync('characters.json').toString());
+        res.end(fs.readFileSync('./data/characters.json').toString());
 
         // serveAsset(200, headers, 'characters.json');
       } else if (fileType === 'html') {

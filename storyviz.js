@@ -4,7 +4,7 @@ var width = $('#network').width(),
 
 
 
-d3.json("characters.json", function(json) {
+d3.json("/data/characters.json", function(json) {
     var force = d3.layout.force()
         .nodes(json.nodes)
         .links(json.links)
