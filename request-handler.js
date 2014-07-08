@@ -34,7 +34,7 @@ exports.handleRequest = function(req, res) {
         serveAsset(200, headers, "." + pathName);
       } else if (fileType ==='json') {
         headers['Content-Type'] = 'application/json';
-        serveAsset(200, headers, "." + pathName);
+        serveAsset(200, headers, 'characters.json');
       } else {
         headers['Content-Type'] = 'application/javascript';
         serveAsset(200, headers, "." + pathName);
