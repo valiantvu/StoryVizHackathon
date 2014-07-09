@@ -10,7 +10,7 @@ d3.json("/data/characters.json", function(json) {
         .charge(-150)
         .linkDistance(50)
         .size([width, height])
-        .gravity(0.20)
+        .gravity(0.45)
         .on("tick", tick);
 
     var svg = d3.select("#network").append("svg")
