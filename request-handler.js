@@ -1,6 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 var url = require("url");
+// var data = require("./data/characters.js").data;
 
 exports.handleRequest = function(req, res) {
     var pathName = url.parse(req.url).pathname;
