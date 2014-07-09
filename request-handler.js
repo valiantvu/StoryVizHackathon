@@ -1,7 +1,6 @@
 var fs = require("fs");
 var path = require("path");
 var url = require("url");
-// var data = require("./data/characters.js").data;
 
 exports.handleRequest = function(req, res) {
     var pathName = url.parse(req.url).pathname;
@@ -25,15 +24,8 @@ exports.handleRequest = function(req, res) {
     }
 
     if (req.method === 'GET') {
-      
-      console.log("pathName: ", pathName);
-      console.log("fileType: ", fileType);
 
-      if (fileType === 'json') {
-        headers['Content-Type'] = 'application/json';
-        res.writeHead(200, headers);
-        res.end(fs.readFileSync('./data/characters.json').toString());
-      } else if (req.url === '/') {
+      if (req.url === '/') {
         serveAsset(200, headers, 'index.html');
       // } else if (fileType === 'json') {
       //   headers['Content-Type'] = 'application/json';
@@ -41,8 +33,6 @@ exports.handleRequest = function(req, res) {
       //   res.end(fs.readFileSync('./data/characters.json').toString());
 
         // serveAsset(200, headers, 'characters.json');
-      } else if (fileType === 'html') {
-        serveAsset(200, headers, 'index.html');
       } else if (fileType === 'css') {
         headers['Content-Type'] = 'text/css';
         serveAsset(200, headers, "." + pathName);
